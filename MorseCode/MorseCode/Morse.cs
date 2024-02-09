@@ -1,13 +1,14 @@
 namespace MorseCode; 
 
 public class Morse {
-    protected Dictionary<string, string> Slovnik = new() {
+    private readonly Dictionary<string, string> _slovnik = new() {
         {"a", ".-"}, 
         {"á", ".-"}, 
         {"ą", ".-"},
         {"b", "-..."},
         {"c", "-.-."},
         {"č", "-.-."},
+        
         {"d", "-.."},
         {"ď", "-.."},
         {"e", "."},
@@ -79,8 +80,8 @@ public class Morse {
                 znaky.RemoveAt(i + 1);
             }
             
-            if (Slovnik.ContainsKey(znaky[i])) {
-                zasifrovano += Slovnik[znaky[i]] + "/";
+            if (_slovnik.TryGetValue(_slovnik[znaky[i]], out string? value)) {
+                zasifrovano += value + "/";
             } else {
                 zasifrovano += "";
             }
@@ -98,8 +99,8 @@ public class Morse {
         }
        
         for (int i = 0; i < znaky.Count; i++) {
-            if (Slovnik.ContainsValue(znaky[i])) {
-                desifrovano += Slovnik.FirstOrDefault(x => x.Value == znaky[i]).Key;
+            if (_slovnik.ContainsValue(znaky[i])) {
+                desifrovano += _slovnik.FirstOrDefault(x => x.Value == znaky[i]).Key;
             } else {
                 desifrovano += "?"; // tady si muzeme dovolit dat otaznik
             }
