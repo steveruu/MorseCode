@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Logging.Console;
-
 namespace MorseCode; 
 
 public class Morse {
@@ -61,7 +59,6 @@ public class Morse {
         {" ", ""}
     };
     
-    // predelat š na s, č na c atd.
     public List<string> Split(string text) {
         List<string> znaky = new();
         
@@ -74,7 +71,6 @@ public class Morse {
 
     public string Encode(string text) {
         string zasifrovano = "";
-
         List<string> znaky = Split(text);
         
         for (int i = 0; i < znaky.Count; i++) {
@@ -87,7 +83,6 @@ public class Morse {
                 zasifrovano += Slovnik[znaky[i]] + "/";
             } else {
                 zasifrovano += "";
-            
             }
         }
         
@@ -106,7 +101,7 @@ public class Morse {
             if (Slovnik.ContainsValue(znaky[i])) {
                 desifrovano += Slovnik.FirstOrDefault(x => x.Value == znaky[i]).Key;
             } else {
-                desifrovano += "?";
+                desifrovano += "?"; // tady si muzeme dovolit dat otaznik
             }
         }
         
