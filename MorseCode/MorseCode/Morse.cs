@@ -70,6 +70,16 @@ public class Morse {
         return znaky;
     }
 
+    public List<string> Split(string text, string separator) {
+        List<string> znaky = new(); 
+        
+        foreach (string znak in text.Split(separator)) {
+            znaky.Add(znak);
+        }
+
+        return znaky;
+    }
+
     public string Encode(string text) {
         string zasifrovano = "";
         List<string> znaky = Split(text);
@@ -92,11 +102,7 @@ public class Morse {
 
     public string Decode(string text) {
         string desifrovano = "";
-        List<string> znaky = new(); 
-        
-        foreach (string znak in text.Split("/")) {
-            znaky.Add(znak);
-        }
+        List<string> znaky = Split(text, "/");
        
         for (int i = 0; i < znaky.Count; i++) {
             if (_slovnik.ContainsValue(znaky[i])) {
