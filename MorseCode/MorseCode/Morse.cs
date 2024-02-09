@@ -79,7 +79,7 @@ public class Morse {
             }
             
             if (Slovnik.ContainsKey(znaky[i])) {
-                zasifrovano += Slovnik[znaky[i]] + " ";
+                zasifrovano += Slovnik[znaky[i]] + "/";
             }
         }
         
@@ -88,9 +88,20 @@ public class Morse {
 
     public string Decode(string text) {
         string desifrovano = "";
+        List<string> znaky = new(); 
         
-        string[] symbols = text.Split('/');
-
-        return "A";
+        foreach (string znak in text.Split("/")) {
+            znaky.Add(znak);
+        }
+       
+        for (int i = 0; i < znaky.Count; i++) {
+            if (Slovnik.ContainsValue(znaky[i])) {
+                desifrovano += Slovnik.FirstOrDefault(x => x.Value == znaky[i]).Key;
+            } else {
+                desifrovano += "";
+            }
+        }
+        
+        return desifrovano;
     }
 }
