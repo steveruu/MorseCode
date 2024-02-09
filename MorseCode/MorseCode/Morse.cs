@@ -58,20 +58,25 @@ public class Morse {
         {"8", "---.."},
         {"9", "----."},
         {"0", "-----"},
-        {" ", "/"}
+        {" ", ""}
     };
     
     // predelat š na s, č na c atd.
-    
-
-    public string Encode(string text) {
-        string zasifrovano = "";
+    public List<string> Split(string text) {
         List<string> znaky = new();
         
         foreach (char znak in text) {
             znaky.Add(znak.ToString().ToLower());
         }
 
+        return znaky;
+    }
+
+    public string Encode(string text) {
+        string zasifrovano = "";
+
+        List<string> znaky = Split(text);
+        
         for (int i = 0; i < znaky.Count; i++) {
             if (znaky[i] == "c" && znaky[i + 1] == "h") {
                 znaky[i] = "ch";
@@ -80,6 +85,9 @@ public class Morse {
             
             if (Slovnik.ContainsKey(znaky[i])) {
                 zasifrovano += Slovnik[znaky[i]] + "/";
+            } else {
+                zasifrovano += "";
+            
             }
         }
         
@@ -98,7 +106,7 @@ public class Morse {
             if (Slovnik.ContainsValue(znaky[i])) {
                 desifrovano += Slovnik.FirstOrDefault(x => x.Value == znaky[i]).Key;
             } else {
-                desifrovano += "";
+                desifrovano += "?";
             }
         }
         
