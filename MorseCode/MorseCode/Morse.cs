@@ -90,7 +90,7 @@ public class Morse {
                 znaky.RemoveAt(i + 1);
             }
             
-            if (_slovnik.TryGetValue(_slovnik[znaky[i]], out string? value)) {
+            if (_slovnik.TryGetValue([znaky[i], out string? value)) {
                 zasifrovano += value + "/";
             } else {
                 zasifrovano += "";
